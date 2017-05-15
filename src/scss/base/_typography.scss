@@ -1,0 +1,12 @@
+/**
+ * Base Typography
+ */
+
+$typeface-primary: "Lato", "Roboto", sans-serif;
+$typeface-secondary: "Helvetica Neue", "Arial", sans-serif;
+
+html, body {
+  font-size: 14px;
+  font-family: $typeface-secondary;
+  line-height: 1.5;
+}
