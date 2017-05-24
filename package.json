@@ -9,13 +9,15 @@
     "build:css": "node-sass src/scss/main.scss build/styles.css",
     "build:js": "rollup -c",
     "build:assets": "cp -r public/* build/",
+    "build:svg": "node bin/compile-svg.js",
     "build": "npm run build:html & npm run build:css & npm run build:js & npm run build:assets",
     "watch:html": "onchange \"src/html/**/*.*\" -- npm run build:html",
     "watch:css": "node-sass -w src/scss/main.scss build/styles.css",
     "watch:js": "rollup -c -w",
     "watch:assets": "onchange \"public/**/*.*\" -- npm run build:assets",
-    "watch": "concurrently -k \"npm run watch:html\" \"npm run watch:css\" \"npm run watch:js\" \"npm run watch:assets\"",
-    "dev": "concurrently -k \"node live-server.js\" \"npm run watch:html\" \"npm run watch:css\" \"npm run watch:js\" \"npm run watch:assets\"",
+    "watch:svg": "onchange \"src/svg/**/*.svg\" -- npm run build:svg",
+    "watch": "concurrently -k \"npm run watch:html\" \"npm run watch:css\" \"npm run watch:js\" \"npm run watch:assets\" \"npm run watch:svg\"",
+    "dev": "concurrently -k \"node live-server.js\" \"npm run watch:html\" \"npm run watch:css\" \"npm run watch:js\" \"npm run watch:assets\" \"npm run watch:svg\"",
     "predist": "del-cli dist/**/*.*",
     "dist": "cp -r src/html/* dist/ && node-sass --output-style compressed src/scss/main.scss dist/styles.css && rollup -c --environment NODE_ENV:production && cp -r public/* dist/",
     "postdist": "postcss dist/styles.css -u autoprefixer -r --no-map"
@@ -28,17 +30,23 @@
     "babel-preset-latest": "^6.24.1",
     "concurrently": "^3.4.0",
     "del-cli": "^1.0.0",
+    "glob": "^7.1.2",
     "live-server": "^1.2.0",
     "ncp": "^2.0.0",
     "node-sass": "^4.5.2",
     "onchange": "^3.2.1",
     "postcss-cli": "^4.0.0",
+    "replace-in-file": "^2.5.0",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-uglify": "^1.0.2",
-    "rollup-watch": "^3.2.2"
+    "rollup-watch": "^3.2.2",
+    "svgstore": "^2.0.2",
+    "svgstore-cli": "^1.3.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "svgxuse": "^1.2.4"
+  }
 }
